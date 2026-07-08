@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Palette: "Measured"
+  A cool porcelain light surface with a spruce ink, a deep teal signature accent,
+  and a reserved gold used only on the dark evaluation panels where the real
+  measured numbers live. Deliberately not the cream + serif + terracotta look,
+  not the near-black + acid-accent look, and not the broadsheet hairline look.
+
+  Light tokens live on :root. Dark tokens apply when the viewer prefers dark
+  (and has not forced light) or when the theme toggle sets data-theme="dark".
+*/
+
+:root {
+  --paper: 236 238 236; /* #ECEEEC porcelain */
+  --surface: 255 255 255; /* #FFFFFF card */
+  --raised: 244 247 245; /* #F4F7F5 raised panel */
+  --ink: 14 28 25; /* #0E1C19 spruce ink */
+  --muted: 84 101 96; /* #546560 slate-sage */
+  --faint: 128 142 137; /* #808E89 */
+  --line: 214 221 217; /* #D6DDD9 hairline */
+  --teal: 11 118 105; /* #0B7669 signature */
+  --teal-soft: 221 238 234; /* #DDEEEA teal wash */
+  --amber: 163 110 16; /* #A36E10 gold for light-surface accents */
+  --spruce: 11 24 22; /* #0B1816 dark panel base */
+
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: 9 18 16; /* #091210 */
+    --surface: 15 27 24; /* #0F1B18 */
+    --raised: 20 34 30; /* #14221E */
+    --ink: 231 240 236; /* #E7F0EC */
+    --muted: 150 169 162; /* #96A9A2 */
+    --faint: 106 126 119; /* #6A7E77 */
+    --line: 33 48 43; /* #21302B */
+    --teal: 52 194 172; /* #34C2AC */
+    --teal-soft: 17 39 35; /* #112723 */
+    --amber: 232 178 78; /* #E8B24E */
+    --spruce: 7 15 13; /* #070F0D */
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: 9 18 16;
+  --surface: 15 27 24;
+  --raised: 20 34 30;
+  --ink: 231 240 236;
+  --muted: 150 169 162;
+  --faint: 106 126 119;
+  --line: 33 48 43;
+  --teal: 52 194 172;
+  --teal-soft: 17 39 35;
+  --amber: 232 178 78;
+  --spruce: 7 15 13;
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--line));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: rgb(var(--paper));
+    color: rgb(var(--ink));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: rgb(var(--teal) / 0.24);
+    color: rgb(var(--ink));
+  }
+
+  /* Visible keyboard focus everywhere, without a mouse-click outline. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--teal));
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .container-edge {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-edge {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Small mono label used for section kickers and metric captions. */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--teal));
+    font-weight: 500;
+  }
+
+  .card {
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--line));
+    border-radius: 18px;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(rgb(var(--teal)), rgb(var(--teal)));
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .link-underline:hover {
+    background-size: 100% 1.5px;
+  }
+}
+
+/* Respect reduced-motion: cut animation and smooth-scroll for anyone who asks. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Grain-free subtle grid used behind the hero, drawn with CSS only. */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgb(var(--line) / 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--line) / 0.5) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 75%);
+}

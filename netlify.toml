@@ -1,0 +1,12 @@
+# Netlify deploy config for the Next.js App Router site.
+# Matches the Node 20 + Next runtime plugin pattern used on the other deployments.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
