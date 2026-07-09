@@ -11,19 +11,20 @@
 */
 
 :root {
-  --paper: 255 255 255; /* #FFFFFF white background */
-  --surface: 255 255 255; /* #FFFFFF card */
-  --raised: 244 244 242; /* #F4F4F2 raised */
-  --ink: 18 18 17; /* #121211 near-black */
-  --muted: 92 92 87; /* #5C5C57 gray */
-  --faint: 143 143 137; /* #8F8F89 */
-  --line: 226 226 221; /* #E2E2DD hairline */
-  --teal: 18 18 17; /* monochrome accent (ink), matches the reference */
-  --teal-soft: 233 233 228; /* #E9E9E4 neutral wash */
-  --amber: 40 40 38; /* neutral, kept for token compatibility */
-  --box: 20 20 19; /* #141413 dark kicker box */
-  --box-ink: 236 236 232; /* #ECECE8 */
-  --box-muted: 150 150 143; /* #96968F */
+  /* Deep navy + warm gold on a soft blue-grey paper. Colored, not black/white. */
+  --paper: 232 236 243; /* #E8ECF3 soft cool paper */
+  --surface: 248 250 253; /* #F8FAFD tinted card */
+  --raised: 226 231 240; /* #E2E7F0 raised */
+  --ink: 23 33 59; /* #17213B deep navy */
+  --muted: 89 99 122; /* #59637A slate */
+  --faint: 139 148 168; /* #8B94A8 */
+  --line: 210 217 229; /* #D2D9E5 cool hairline */
+  --teal: 179 125 20; /* #B37D14 warm gold accent (links, underlines, metrics) */
+  --teal-soft: 244 237 222; /* #F4EDDE warm gold wash */
+  --amber: 179 125 20; /* #B37D14 gold */
+  --box: 20 29 53; /* #141D35 deep navy box */
+  --box-ink: 232 236 244; /* #E8ECF4 */
+  --box-muted: 141 151 179; /* #8D97B3 */
 
   --font-display: "Hanken Grotesk", system-ui, sans-serif;
   --font-sans: "Hanken Grotesk", system-ui, sans-serif;

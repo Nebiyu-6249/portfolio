@@ -19,14 +19,14 @@ function MetricRow({ metric }: { metric: Metric }) {
     <div className="py-3.5">
       <div className="flex items-baseline justify-between gap-4">
         <span className="text-sm text-white/70">{metric.label}</span>
-        <span className="font-mono text-lg font-semibold tracking-tight text-[#FFFFFF]">
+        <span className="font-mono text-lg font-semibold tracking-tight text-[#E9B44C]">
           <CountUp value={metric.display} />
         </span>
       </div>
       {hasBar ? (
         <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
           <motion.div
-            className="h-full rounded-full bg-[#FFFFFF]"
+            className="h-full rounded-full bg-[#E9B44C]"
             initial={reduce ? false : { width: 0 }}
             whileInView={{ width: `${displayFill * 100}%` }}
             viewport={{ once: true, margin: "0px 0px -40px 0px" }}
@@ -52,7 +52,7 @@ function BaselineCompare() {
     return ((Math.log10(v) - min) / (max - min)) * 100;
   };
   const rows = [
-    { ...fraudBaseline.model, color: "#FFFFFF", strong: true },
+    { ...fraudBaseline.model, color: "#E9B44C", strong: true },
     { ...fraudBaseline.chance, color: "rgba(255,255,255,0.35)", strong: false },
   ];
 
@@ -62,7 +62,7 @@ function BaselineCompare() {
         <span className="font-mono text-[0.65rem] uppercase tracking-wider text-white/40">
           Autoencoder vs random chance
         </span>
-        <span className="rounded-full bg-[#FFFFFF]/15 px-2.5 py-1 font-mono text-[0.65rem] font-medium text-[#A6A6A6]">
+        <span className="rounded-full bg-[#E9B44C]/15 px-2.5 py-1 font-mono text-[0.65rem] font-medium text-[#9AA6C6]">
           {fraudBaseline.ratioLabel}
         </span>
       </div>
@@ -75,7 +75,7 @@ function BaselineCompare() {
               </span>
               <span
                 className={`font-mono text-sm ${
-                  r.strong ? "font-semibold text-[#FFFFFF]" : "text-white/50"
+                  r.strong ? "font-semibold text-[#E9B44C]" : "text-white/50"
                 }`}
               >
                 {r.value}
@@ -115,12 +115,12 @@ export function MetricsPanel({
   showBaseline?: boolean;
 }) {
   return (
-    <div className="overflow-hidden rounded-card border border-white/10 bg-gradient-to-b from-[#1a1a19] to-[#080808] text-white shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]">
+    <div className="overflow-hidden rounded-card border border-white/10 bg-gradient-to-b from-[#1b2540] to-[#0c1324] text-white shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]">
       <div className="border-b border-white/10 p-6 sm:p-7">
         <div className="flex items-center gap-2.5">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFFFFF] opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FFFFFF]" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E9B44C] opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#E9B44C]" />
           </span>
           <span className="font-mono text-[0.7rem] uppercase tracking-wider text-white/50">
             {eyebrow}
@@ -152,7 +152,7 @@ export function MetricsPanel({
           {groups.map((group) => (
             <div key={group.title}>
               <div className="mb-1 flex items-baseline justify-between border-b border-white/10 pb-2">
-                <h4 className="font-mono text-xs font-medium uppercase tracking-wider text-[#A6A6A6]">
+                <h4 className="font-mono text-xs font-medium uppercase tracking-wider text-[#9AA6C6]">
                   {group.title}
                 </h4>
               </div>
