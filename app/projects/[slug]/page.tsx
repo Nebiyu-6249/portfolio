@@ -5,6 +5,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Contact";
 import { Reveal } from "@/components/motion";
 import { MetricsPanel } from "@/components/MetricsPanel";
+import { ProjectThumb } from "@/components/ProjectThumb";
 import { ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
 import { caseStudySlugs, getProject } from "@/data/projects";
 import { uaeCopilotMetrics, fraudMetrics } from "@/data/metrics";
@@ -68,9 +69,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <main id="main">
         <article className="pb-16">
           {/* Header */}
-          <header className="relative overflow-hidden border-b border-line">
-            <div className="pointer-events-none absolute inset-0 hero-grid" aria-hidden="true" />
-            <div className="container-edge relative py-14 sm:py-20">
+          <header className="border-b border-line">
+            <div className="container-edge py-14 sm:py-20">
               <Link
                 href="/#projects"
                 className="group inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-muted transition-colors hover:text-teal"
@@ -80,7 +80,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               </Link>
 
               <div className="mt-6 flex items-center gap-2.5">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-muted">
+                <span className="inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-muted">
                   {live ? (
                     <span className="h-1.5 w-1.5 rounded-full bg-teal" />
                   ) : (
@@ -117,6 +117,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               </div>
             </div>
           </header>
+
+          <div className="container-edge pt-10">
+            <div className="mx-auto max-w-4xl border border-line">
+              <ProjectThumb slug={project.slug} />
+            </div>
+          </div>
 
           <div className="container-edge grid gap-12 py-14 lg:grid-cols-[1fr_18rem] lg:gap-16 lg:py-20">
             <div className="min-w-0">
@@ -158,7 +164,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
               {cs.honest ? (
                 <Reveal>
-                  <aside className="mt-12 rounded-card border border-teal/30 bg-teal-soft/60 p-6 sm:p-7">
+                  <aside className="mt-12 border-l-2 border-teal bg-teal-soft/50 p-6 sm:p-7">
                     <p className="kicker">Honest note</p>
                     <h2 className="mt-2 font-display text-lg font-semibold tracking-tight">
                       {cs.honest.heading}
@@ -175,16 +181,13 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
             {/* Sidebar: tech stack */}
             <aside className="lg:sticky lg:top-24 lg:self-start">
-              <div className="rounded-card border border-line bg-surface p-6">
-                <h2 className="font-mono text-xs font-medium uppercase tracking-wider text-teal">
+              <div className="border border-line bg-surface p-6">
+                <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-teal">
                   Stack
                 </h2>
                 <ul className="mt-4 flex flex-wrap gap-1.5">
                   {project.tech.map((t) => (
-                    <li
-                      key={t}
-                      className="rounded-md bg-raised px-2 py-1 font-mono text-[0.7rem] text-muted"
-                    >
+                    <li key={t} className="chip">
                       {t}
                     </li>
                   ))}
@@ -214,7 +217,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <div className="container-edge">
             <Link
               href="/#projects"
-              className="group inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-teal hover:text-teal"
+              className="group inline-flex items-center gap-2 border border-line px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-teal hover:text-teal"
             >
               <ArrowRight className="h-4 w-4 rotate-180" />
               Back to all projects

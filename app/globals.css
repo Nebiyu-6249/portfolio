@@ -3,62 +3,65 @@
 @tailwind utilities;
 
 /*
-  Palette: "Measured"
-  A cool porcelain light surface with a spruce ink, a deep teal signature accent,
-  and a reserved gold used only on the dark evaluation panels where the real
-  measured numbers live. Deliberately not the cream + serif + terracotta look,
-  not the near-black + acid-accent look, and not the broadsheet hairline look.
-
-  Light tokens live on :root. Dark tokens apply when the viewer prefers dark
-  (and has not forced light) or when the theme toggle sets data-theme="dark".
+  Layout and type borrowed from the reference: a light graph-paper page, very
+  heavy grotesque headings with an underlined keyword, mono uppercase kickers,
+  dark kicker boxes beside giant section titles, and bordered card grids.
+  Color identity kept from the previous build: near-neutral surface, a single
+  teal accent, and a dark evaluation panel where the real measured numbers live.
 */
 
 :root {
-  --paper: 236 238 236; /* #ECEEEC porcelain */
+  --paper: 246 246 243; /* #F6F6F3 warm off-white */
   --surface: 255 255 255; /* #FFFFFF card */
-  --raised: 244 247 245; /* #F4F7F5 raised panel */
-  --ink: 14 28 25; /* #0E1C19 spruce ink */
-  --muted: 84 101 96; /* #546560 slate-sage */
-  --faint: 128 142 137; /* #808E89 */
-  --line: 214 221 217; /* #D6DDD9 hairline */
-  --teal: 11 118 105; /* #0B7669 signature */
-  --teal-soft: 221 238 234; /* #DDEEEA teal wash */
-  --amber: 163 110 16; /* #A36E10 gold for light-surface accents */
-  --spruce: 11 24 22; /* #0B1816 dark panel base */
+  --raised: 241 241 238; /* #F1F1EE raised */
+  --ink: 18 18 17; /* #121211 near-black */
+  --muted: 92 92 87; /* #5C5C57 gray */
+  --faint: 143 143 137; /* #8F8F89 */
+  --line: 224 224 219; /* #E0E0DB hairline */
+  --teal: 12 116 103; /* #0C7467 accent */
+  --teal-soft: 223 238 234; /* #DFEEEA */
+  --amber: 162 108 15; /* #A26C0F */
+  --box: 20 20 19; /* #141413 dark kicker box */
+  --box-ink: 236 236 232; /* #ECECE8 */
+  --box-muted: 150 150 143; /* #96968F */
 
-  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Hanken Grotesk", system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: 9 18 16; /* #091210 */
-    --surface: 15 27 24; /* #0F1B18 */
-    --raised: 20 34 30; /* #14221E */
-    --ink: 231 240 236; /* #E7F0EC */
-    --muted: 150 169 162; /* #96A9A2 */
-    --faint: 106 126 119; /* #6A7E77 */
-    --line: 33 48 43; /* #21302B */
+    --paper: 11 12 11; /* #0B0C0B */
+    --surface: 18 20 18; /* #121412 */
+    --raised: 24 26 24; /* #181A18 */
+    --ink: 235 236 232; /* #EBECE8 */
+    --muted: 150 154 146; /* #969A92 */
+    --faint: 107 112 104; /* #6B7068 */
+    --line: 36 39 35; /* #242723 */
     --teal: 52 194 172; /* #34C2AC */
     --teal-soft: 17 39 35; /* #112723 */
     --amber: 232 178 78; /* #E8B24E */
-    --spruce: 7 15 13; /* #070F0D */
+    --box: 26 28 25; /* #1A1C19 */
+    --box-ink: 236 236 232;
+    --box-muted: 150 150 143;
   }
 }
 
 :root[data-theme="dark"] {
-  --paper: 9 18 16;
-  --surface: 15 27 24;
-  --raised: 20 34 30;
-  --ink: 231 240 236;
-  --muted: 150 169 162;
-  --faint: 106 126 119;
-  --line: 33 48 43;
+  --paper: 11 12 11;
+  --surface: 18 20 18;
+  --raised: 24 26 24;
+  --ink: 235 236 232;
+  --muted: 150 154 146;
+  --faint: 107 112 104;
+  --line: 36 39 35;
   --teal: 52 194 172;
   --teal-soft: 17 39 35;
   --amber: 232 178 78;
-  --spruce: 7 15 13;
+  --box: 26 28 25;
+  --box-ink: 236 236 232;
+  --box-muted: 150 150 143;
 }
 
 @layer base {
@@ -72,23 +75,28 @@
   }
 
   body {
-    background-color: rgb(var(--paper));
     color: rgb(var(--ink));
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    background-color: rgb(var(--paper));
+    /* The graph-paper grid: faint lines over the paper color. */
+    background-image:
+      linear-gradient(rgb(var(--line) / 0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line) / 0.6) 1px, transparent 1px);
+    background-size: 46px 46px;
+    background-position: -1px -1px;
   }
 
   ::selection {
-    background-color: rgb(var(--teal) / 0.24);
+    background-color: rgb(var(--teal) / 0.22);
     color: rgb(var(--ink));
   }
 
-  /* Visible keyboard focus everywhere, without a mouse-click outline. */
   :focus-visible {
     outline: 2px solid rgb(var(--teal));
     outline-offset: 3px;
-    border-radius: 3px;
+    border-radius: 2px;
   }
 
   a,
@@ -100,7 +108,7 @@
 @layer components {
   .container-edge {
     width: 100%;
-    max-width: 72rem;
+    max-width: 82rem;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
@@ -111,36 +119,51 @@
     }
   }
 
-  /* Small mono label used for section kickers and metric captions. */
+  /* Mono uppercase kicker with a leading dash, as in the reference. */
   .kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgb(var(--teal));
-    font-weight: 500;
+    color: rgb(var(--muted));
+    font-weight: 400;
+  }
+
+  /* The underlined keyword inside a giant heading. */
+  .accent-underline {
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--teal));
+    text-decoration-thickness: 5px;
+    text-underline-offset: 6px;
   }
 
   .card {
     background-color: rgb(var(--surface));
     border: 1px solid rgb(var(--line));
-    border-radius: 18px;
   }
 
-  .link-underline {
-    background-image: linear-gradient(rgb(var(--teal)), rgb(var(--teal)));
-    background-size: 0% 1.5px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Outlined pill used for tech tags. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgb(var(--line));
+    padding: 0.3rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--muted));
+    white-space: nowrap;
   }
 
-  .link-underline:hover {
-    background-size: 100% 1.5px;
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
-/* Respect reduced-motion: cut animation and smooth-scroll for anyone who asks. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -153,13 +176,4 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Grain-free subtle grid used behind the hero, drawn with CSS only. */
-.hero-grid {
-  background-image:
-    linear-gradient(to right, rgb(var(--line) / 0.5) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(var(--line) / 0.5) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 75%);
 }

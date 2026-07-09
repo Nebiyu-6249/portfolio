@@ -1,36 +1,46 @@
 import { skillGroups } from "@/data/skills";
-import { Reveal, RevealGroup, RevealItem } from "./motion";
-import { SectionHeading } from "./SectionHeading";
+import { Reveal } from "./motion";
+import { SectionHeader } from "./SectionHeader";
 
 export function Skills() {
   return (
-    <section id="skills" className="scroll-mt-20 border-t border-line py-20 sm:py-28">
+    <section id="skills" className="scroll-mt-20 py-20 sm:py-28">
       <div className="container-edge">
         <Reveal>
-          <SectionHeading kicker="Toolkit" title="What I work with" />
+          <SectionHeader
+            variant="box"
+            kicker="Tech stack"
+            title="Tools & Technologies"
+            description="The tools I reach for to build and ship production systems."
+          />
         </Reveal>
 
-        <RevealGroup className="mt-12 grid gap-5 md:grid-cols-2">
-          {skillGroups.map((group) => (
-            <RevealItem key={group.title} className="h-full">
-              <div className="h-full rounded-card border border-line bg-surface p-6 sm:p-7">
-                <h3 className="font-mono text-xs font-medium uppercase tracking-wider text-teal">
-                  {group.title}
-                </h3>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
+        <Reveal delay={0.05}>
+          <div className="mt-5 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {skillGroups.map((group) => (
+              <div key={group.title} className="flex flex-col bg-surface">
+                <div className="border-b border-line px-5 py-3.5">
+                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.12em] text-teal">
+                    {group.title}
+                  </span>
+                </div>
+                <ul className="flex flex-1 flex-col divide-y divide-line">
+                  {group.items.map((item, i) => (
                     <li
                       key={item}
-                      className="rounded-lg border border-line bg-raised px-3 py-1.5 text-sm text-ink transition-colors hover:border-teal/50"
+                      className="flex items-center justify-between gap-3 px-5 py-3 text-[0.95rem] text-ink"
                     >
-                      {item}
+                      <span>{item}</span>
+                      <span className="shrink-0 font-mono text-[0.65rem] text-faint">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

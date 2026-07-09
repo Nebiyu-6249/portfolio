@@ -19,7 +19,9 @@ const config: Config = {
         teal: "rgb(var(--teal) / <alpha-value>)",
         "teal-soft": "rgb(var(--teal-soft) / <alpha-value>)",
         amber: "rgb(var(--amber) / <alpha-value>)",
-        spruce: "rgb(var(--spruce) / <alpha-value>)",
+        box: "rgb(var(--box) / <alpha-value>)",
+        "box-ink": "rgb(var(--box-ink) / <alpha-value>)",
+        "box-muted": "rgb(var(--box-muted) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
@@ -27,10 +29,10 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       maxWidth: {
-        content: "72rem",
+        content: "82rem",
       },
       borderRadius: {
-        card: "18px",
+        card: "4px",
       },
       keyframes: {
         "fade-up": {
