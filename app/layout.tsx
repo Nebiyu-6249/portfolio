@@ -61,14 +61,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F6F6F3" },
-    { media: "(prefers-color-scheme: dark)", color: "#0B0C0B" },
-  ],
+  themeColor: "#FFFFFF",
 };
-
-// Set the theme before first paint so there is no flash on load.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme', t?t:(d?'dark':'light'));}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -76,14 +70,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${sans.variable} ${mono.variable}`}
-    >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   );

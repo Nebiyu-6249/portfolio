@@ -11,13 +11,13 @@
 */
 
 :root {
-  --paper: 246 246 243; /* #F6F6F3 warm off-white */
+  --paper: 255 255 255; /* #FFFFFF white background */
   --surface: 255 255 255; /* #FFFFFF card */
-  --raised: 241 241 238; /* #F1F1EE raised */
+  --raised: 244 244 242; /* #F4F4F2 raised */
   --ink: 18 18 17; /* #121211 near-black */
   --muted: 92 92 87; /* #5C5C57 gray */
   --faint: 143 143 137; /* #8F8F89 */
-  --line: 224 224 219; /* #E0E0DB hairline */
+  --line: 226 226 221; /* #E2E2DD hairline */
   --teal: 18 18 17; /* monochrome accent (ink), matches the reference */
   --teal-soft: 233 233 228; /* #E9E9E4 neutral wash */
   --amber: 40 40 38; /* neutral, kept for token compatibility */
@@ -28,40 +28,6 @@
   --font-display: "Hanken Grotesk", system-ui, sans-serif;
   --font-sans: "Hanken Grotesk", system-ui, sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: 11 12 11; /* #0B0C0B */
-    --surface: 18 20 18; /* #121412 */
-    --raised: 24 26 24; /* #181A18 */
-    --ink: 235 236 232; /* #EBECE8 */
-    --muted: 150 154 146; /* #969A92 */
-    --faint: 107 112 104; /* #6B7068 */
-    --line: 36 39 35; /* #242723 */
-    --teal: 235 236 232; /* monochrome accent (near-white) */
-    --teal-soft: 29 32 28; /* #1D201C neutral wash */
-    --amber: 210 212 206; /* neutral, kept for token compatibility */
-    --box: 26 28 25; /* #1A1C19 */
-    --box-ink: 236 236 232;
-    --box-muted: 150 150 143;
-  }
-}
-
-:root[data-theme="dark"] {
-  --paper: 11 12 11;
-  --surface: 18 20 18;
-  --raised: 24 26 24;
-  --ink: 235 236 232;
-  --muted: 150 154 146;
-  --faint: 107 112 104;
-  --line: 36 39 35;
-  --teal: 235 236 232;
-  --teal-soft: 29 32 28;
-  --amber: 210 212 206;
-  --box: 26 28 25;
-  --box-ink: 236 236 232;
-  --box-muted: 150 150 143;
 }
 
 @layer base {

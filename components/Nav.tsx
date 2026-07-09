@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
   { href: "/#about", label: "About" },
@@ -50,15 +49,12 @@ export function Nav() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
-          <a
-            href="/#contact"
-            className="hidden bg-ink px-4 py-2 text-sm font-semibold text-paper transition-opacity hover:opacity-90 sm:inline-block"
-          >
-            Get in touch
-          </a>
-          <ThemeToggle />
-        </div>
+        <a
+          href="/#contact"
+          className="bg-ink px-4 py-2 text-sm font-semibold text-paper transition-opacity hover:opacity-90"
+        >
+          Get in touch
+        </a>
       </nav>
     </header>
   );
