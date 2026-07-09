@@ -11,16 +11,17 @@
 */
 
 :root {
-  /* Deep teal on a soft cool-mint paper. Colored, not black/white. */
-  --paper: 236 241 239; /* #ECF1EF pale cool mint */
-  --surface: 250 252 251; /* #FAFCFB tinted card */
-  --raised: 230 237 234; /* #E6EDEA raised */
+  /* Deep teal on a soft sage paper. The paper is a clear step darker than the
+     white cards and thumbnails so they stand out instead of washing together. */
+  --paper: 205 216 211; /* #CDD8D3 soft sage, gives cards clear separation */
+  --surface: 251 253 252; /* #FBFDFC near-white card */
+  --raised: 230 238 235; /* #E6EEEB raised */
   --ink: 16 36 31; /* #10241F deep teal-charcoal */
-  --muted: 84 102 95; /* #54665F slate-teal */
-  --faint: 135 154 147; /* #879A93 */
-  --line: 211 222 217; /* #D3DED9 cool hairline */
+  --muted: 79 97 90; /* #4F615A slate-teal */
+  --faint: 112 130 122; /* #70827A reads on sage */
+  --line: 183 198 191; /* #B7C6BF visible hairline */
   --teal: 15 118 110; /* #0F766E deep teal accent (links, underlines, metrics) */
-  --teal-soft: 221 236 232; /* #DDECE8 teal wash */
+  --teal-soft: 215 231 226; /* #D7E7E2 teal wash */
   --amber: 15 118 110; /* #0F766E teal */
   --box: 13 38 33; /* #0D2621 deep teal box */
   --box-ink: 230 239 236; /* #E6EFEC */
