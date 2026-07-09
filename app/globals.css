@@ -11,20 +11,20 @@
 */
 
 :root {
-  /* Deep navy + warm gold on a soft blue-grey paper. Colored, not black/white. */
-  --paper: 232 236 243; /* #E8ECF3 soft cool paper */
-  --surface: 248 250 253; /* #F8FAFD tinted card */
-  --raised: 226 231 240; /* #E2E7F0 raised */
-  --ink: 23 33 59; /* #17213B deep navy */
-  --muted: 89 99 122; /* #59637A slate */
-  --faint: 139 148 168; /* #8B94A8 */
-  --line: 210 217 229; /* #D2D9E5 cool hairline */
-  --teal: 179 125 20; /* #B37D14 warm gold accent (links, underlines, metrics) */
-  --teal-soft: 244 237 222; /* #F4EDDE warm gold wash */
-  --amber: 179 125 20; /* #B37D14 gold */
-  --box: 20 29 53; /* #141D35 deep navy box */
-  --box-ink: 232 236 244; /* #E8ECF4 */
-  --box-muted: 141 151 179; /* #8D97B3 */
+  /* Deep teal on a soft cool-mint paper. Colored, not black/white. */
+  --paper: 236 241 239; /* #ECF1EF pale cool mint */
+  --surface: 250 252 251; /* #FAFCFB tinted card */
+  --raised: 230 237 234; /* #E6EDEA raised */
+  --ink: 16 36 31; /* #10241F deep teal-charcoal */
+  --muted: 84 102 95; /* #54665F slate-teal */
+  --faint: 135 154 147; /* #879A93 */
+  --line: 211 222 217; /* #D3DED9 cool hairline */
+  --teal: 15 118 110; /* #0F766E deep teal accent (links, underlines, metrics) */
+  --teal-soft: 221 236 232; /* #DDECE8 teal wash */
+  --amber: 15 118 110; /* #0F766E teal */
+  --box: 13 38 33; /* #0D2621 deep teal box */
+  --box-ink: 230 239 236; /* #E6EFEC */
+  --box-muted: 126 154 147; /* #7E9A93 */
 
   --font-display: "Hanken Grotesk", system-ui, sans-serif;
   --font-sans: "Hanken Grotesk", system-ui, sans-serif;

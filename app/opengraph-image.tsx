@@ -22,7 +22,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "linear-gradient(135deg, #1b2540 0%, #0c1324 100%)",
+          background: "linear-gradient(135deg, #0e2b25 0%, #06150f 100%)",
           color: "#F4F4F1",
           fontFamily: "sans-serif",
         }}
@@ -37,7 +37,7 @@ export default function OpengraphImage() {
               height: "44px",
               borderRadius: "10px",
               background: "#F4F4F1",
-              color: "#17213B",
+              color: "#10241F",
               fontSize: "26px",
               fontWeight: 800,
             }}
@@ -50,7 +50,7 @@ export default function OpengraphImage() {
               fontSize: "20px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#E9B44C",
+              color: "#2FD4BF",
               fontWeight: 600,
             }}
           >
@@ -62,7 +62,7 @@ export default function OpengraphImage() {
           <div style={{ display: "flex", fontSize: "78px", fontWeight: 800, letterSpacing: "-0.02em" }}>
             {site.name}
           </div>
-          <div style={{ display: "flex", marginTop: "10px", fontSize: "34px", color: "#9AA6C6" }}>
+          <div style={{ display: "flex", marginTop: "10px", fontSize: "34px", color: "#8FB0A9" }}>
             {site.role} · {site.location}
           </div>
         </div>
@@ -81,10 +81,10 @@ export default function OpengraphImage() {
                 background: "rgba(255,255,255,0.03)",
               }}
             >
-              <div style={{ display: "flex", fontSize: "48px", fontWeight: 700, color: "#E9B44C" }}>
+              <div style={{ display: "flex", fontSize: "48px", fontWeight: 700, color: "#2FD4BF" }}>
                 {s.value}
               </div>
-              <div style={{ display: "flex", marginTop: "8px", fontSize: "22px", color: "#9AA6C6" }}>
+              <div style={{ display: "flex", marginTop: "8px", fontSize: "22px", color: "#8FB0A9" }}>
                 {s.label}
               </div>
             </div>
