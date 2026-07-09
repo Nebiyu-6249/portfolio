@@ -22,8 +22,8 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "linear-gradient(135deg, #0C1A18 0%, #06100E 100%)",
-          color: "#E7F0EC",
+          background: "linear-gradient(135deg, #1a1a19 0%, #070707 100%)",
+          color: "#F4F4F1",
           fontFamily: "sans-serif",
         }}
       >
@@ -36,7 +36,7 @@ export default function OpengraphImage() {
               width: "44px",
               height: "44px",
               borderRadius: "10px",
-              background: "#E7F0EC",
+              background: "#F4F4F1",
               color: "#0B1816",
               fontSize: "26px",
               fontWeight: 800,
@@ -50,7 +50,7 @@ export default function OpengraphImage() {
               fontSize: "20px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#34C2AC",
+              color: "#FFFFFF",
               fontWeight: 600,
             }}
           >
@@ -62,7 +62,7 @@ export default function OpengraphImage() {
           <div style={{ display: "flex", fontSize: "78px", fontWeight: 800, letterSpacing: "-0.02em" }}>
             {site.name}
           </div>
-          <div style={{ display: "flex", marginTop: "10px", fontSize: "34px", color: "#96A9A2" }}>
+          <div style={{ display: "flex", marginTop: "10px", fontSize: "34px", color: "#9A9A95" }}>
             {site.role} · {site.location}
           </div>
         </div>
@@ -81,10 +81,10 @@ export default function OpengraphImage() {
                 background: "rgba(255,255,255,0.03)",
               }}
             >
-              <div style={{ display: "flex", fontSize: "48px", fontWeight: 700, color: "#E8B24E" }}>
+              <div style={{ display: "flex", fontSize: "48px", fontWeight: 700, color: "#FFFFFF" }}>
                 {s.value}
               </div>
-              <div style={{ display: "flex", marginTop: "8px", fontSize: "22px", color: "#96A9A2" }}>
+              <div style={{ display: "flex", marginTop: "8px", fontSize: "22px", color: "#9A9A95" }}>
                 {s.label}
               </div>
             </div>
