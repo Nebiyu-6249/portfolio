@@ -7,6 +7,7 @@ import { CountUp } from "./CountUp";
 import { ArrowUpRight } from "./Icons";
 import { HandArrow, Tape } from "./Sketch";
 import { TechLogos } from "./TechLogos";
+import { Portrait } from "./Portrait";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const rots = ["rot-a", "rot-b", "rot-c", "rot-d", "rot-e"];
@@ -25,9 +26,9 @@ export function Hero() {
 
   return (
     <section id="home" className="relative scroll-mt-20">
-      <div className="container-edge pb-16 pt-14 sm:pt-20 md:pb-24 md:pt-24">
-        <motion.div variants={container} initial="hidden" animate="show">
-          <motion.div variants={item} className="flex flex-wrap items-center gap-3">
+      <div className="relative container-edge pb-16 pt-14 sm:pt-20 md:pb-24 md:pt-24">
+        <motion.div variants={container} initial="hidden" animate="show" className="lg:pr-52">
+          <motion.div variants={item} className="flex flex-wrap items-center gap-3 lg:pr-8">
             <p className="kicker">/ {site.role}</p>
             <span className="font-hand text-base text-muted">{site.location}</span>
             <span className="chip rot-b bg-yellow font-hand text-[0.8rem] font-bold normal-case tracking-normal">
@@ -52,7 +53,7 @@ export function Hero() {
             instead of shipping a demo that only looks good in a screenshot.
           </motion.p>
 
-          <motion.div variants={item} className="relative mt-9 flex flex-wrap items-center gap-4">
+          <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
             <a href="/#projects" className="sk-btn sk-btn-primary rot-c">
               View the work
               <ArrowUpRight className="h-4 w-4" />
@@ -65,13 +66,17 @@ export function Hero() {
             >
               GitHub
             </a>
-            {/* hand-drawn arrow pointing at the primary CTA */}
-            <span className="pointer-events-none absolute -right-2 top-1/2 hidden -translate-y-1/2 items-center gap-1 text-red lg:flex xl:-right-16">
-              <span className="font-hand text-base font-bold text-red">start here</span>
-              <HandArrow className="h-10 w-10 -scale-x-100 rotate-[8deg]" />
-            </span>
           </motion.div>
         </motion.div>
+
+        {/* Photo, with a "start here" pointer beneath it, in the top-right. */}
+        <div className="mx-auto mt-12 w-52 lg:absolute lg:right-4 lg:top-24 lg:mx-0 lg:mt-0 lg:w-44 xl:right-10 xl:top-20">
+          <Portrait />
+          <div className="mt-3 flex items-center justify-center gap-1.5 text-red">
+            <HandArrow className="h-9 w-9 -scale-x-100 rotate-[18deg]" />
+            <span className="font-hand text-base font-bold">start here</span>
+          </div>
+        </div>
 
         {/* Signature: real, measured numbers as first-class content. */}
         <motion.div

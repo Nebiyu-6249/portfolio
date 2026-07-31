@@ -2,7 +2,6 @@ import { site } from "@/data/site";
 import { Reveal } from "./motion";
 import { SectionHeader } from "./SectionHeader";
 import { Tape } from "./Sketch";
-import { Portrait } from "./Portrait";
 
 const facts = [
   { k: "Based in", v: "Ras Al Khaimah, UAE", rot: "rot-a", rad: "rad-1" },
@@ -47,8 +46,7 @@ export function About() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <Portrait />
-            <div className="mt-8 grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {facts.map((f) => (
                 <div key={f.k} className={`sk-card ${f.rot} ${f.rad} p-4`}>
                   <p className="font-hand text-sm font-bold text-red">{f.k}</p>
