@@ -5,7 +5,7 @@ import { CertCard } from "./CertCard";
 
 export function Certifications() {
   return (
-    <section id="certifications" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="certifications" className="scroll-mt-24 py-20 sm:py-28">
       <div className="container-edge">
         <Reveal>
           <SectionHeader
@@ -16,10 +16,10 @@ export function Certifications() {
           />
         </Reveal>
 
-        <RevealGroup className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {certifications.map((cert) => (
+        <RevealGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {certifications.map((cert, i) => (
             <RevealItem key={cert.slug} className="h-full">
-              <CertCard cert={cert} />
+              <CertCard cert={cert} index={i} />
             </RevealItem>
           ))}
         </RevealGroup>

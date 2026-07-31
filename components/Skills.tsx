@@ -1,10 +1,13 @@
 import { skillGroups } from "@/data/skills";
-import { Reveal } from "./motion";
+import { Reveal, RevealGroup, RevealItem } from "./motion";
 import { SectionHeader } from "./SectionHeader";
+
+const rots = ["rot-a", "rot-d", "rot-c", "rot-b"];
+const rads = ["rad-1", "rad-2", "rad-3", "rad-4"];
 
 export function Skills() {
   return (
-    <section id="skills" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="skills" className="scroll-mt-24 py-20 sm:py-28">
       <div className="container-edge">
         <Reveal>
           <SectionHeader
@@ -15,32 +18,23 @@ export function Skills() {
           />
         </Reveal>
 
-        <Reveal delay={0.05}>
-          <div className="mt-5 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-            {skillGroups.map((group) => (
-              <div key={group.title} className="flex flex-col bg-surface">
-                <div className="border-b border-line px-5 py-3.5">
-                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.12em] text-teal">
-                    {group.title}
-                  </span>
-                </div>
-                <ul className="flex flex-1 flex-col divide-y divide-line">
-                  {group.items.map((item, i) => (
-                    <li
-                      key={item}
-                      className="flex items-center justify-between gap-3 px-5 py-3 text-[0.95rem] text-ink"
-                    >
-                      <span>{item}</span>
-                      <span className="shrink-0 font-mono text-[0.65rem] text-faint">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
+        <RevealGroup className="mt-12 grid gap-6 md:grid-cols-2">
+          {skillGroups.map((group, gi) => (
+            <RevealItem key={group.title} className="h-full">
+              <div className={`sk-card ${rots[gi % rots.length]} ${rads[gi % rads.length]} h-full p-6 sm:p-7`}>
+                <h3 className="font-display text-2xl leading-none">{group.title}</h3>
+                <span className="mt-3 block h-0.5 w-14 bg-red" aria-hidden="true" />
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {group.items.map((item, ii) => (
+                    <li key={item} className={`chip ${ii % 3 === 0 ? "bg-yellow" : ""}`}>
+                      {item}
                     </li>
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
-        </Reveal>
+            </RevealItem>
+          ))}
+        </RevealGroup>
       </div>
     </section>
   );

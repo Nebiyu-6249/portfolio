@@ -4,8 +4,12 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { Metric, MetricGroup } from "@/data/metrics";
 import { fraudBaseline } from "@/data/metrics";
 import { CountUp } from "./CountUp";
+import { Tape } from "./Sketch";
 
 const ease = [0.16, 1, 0.3, 1] as const;
+const PAPER = "#F8F3E9";
+const RED = "#E8433F";
+const YELLOW = "#FFD866";
 
 function MetricRow({ metric }: { metric: Metric }) {
   const reduce = useReducedMotion();
@@ -16,28 +20,26 @@ function MetricRow({ metric }: { metric: Metric }) {
     metric.fill !== undefined ? Math.max(metric.fill, metric.fill > 0 ? 0.02 : 0) : 0;
 
   return (
-    <div className="py-3.5">
+    <div className="py-3">
       <div className="flex items-baseline justify-between gap-4">
-        <span className="text-sm text-white/70">{metric.label}</span>
-        <span className="font-mono text-lg font-semibold tracking-tight text-[#2FD4BF]">
+        <span className="text-sm text-paper/75">{metric.label}</span>
+        <span className="font-mono text-lg font-bold tracking-tight" style={{ color: YELLOW }}>
           <CountUp value={metric.display} />
         </span>
       </div>
       {hasBar ? (
-        <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+        <div className="mt-2.5 h-2 w-full overflow-hidden rounded-full border border-paper/25 bg-paper/10">
           <motion.div
-            className="h-full rounded-full bg-[#2FD4BF]"
+            className="h-full rounded-full"
+            style={reduce ? { backgroundColor: RED, width: `${displayFill * 100}%` } : { backgroundColor: RED }}
             initial={reduce ? false : { width: 0 }}
             whileInView={{ width: `${displayFill * 100}%` }}
             viewport={{ once: true, margin: "0px 0px -40px 0px" }}
             transition={{ duration: 1, ease, delay: 0.1 }}
-            style={reduce ? { width: `${displayFill * 100}%` } : undefined}
           />
         </div>
       ) : null}
-      {metric.note ? (
-        <p className="mt-2 text-xs leading-relaxed text-white/45">{metric.note}</p>
-      ) : null}
+      {metric.note ? <p className="mt-2 text-xs leading-relaxed text-paper/55">{metric.note}</p> : null}
     </div>
   );
 }
@@ -52,17 +54,18 @@ function BaselineCompare() {
     return ((Math.log10(v) - min) / (max - min)) * 100;
   };
   const rows = [
-    { ...fraudBaseline.model, color: "#2FD4BF", strong: true },
-    { ...fraudBaseline.chance, color: "rgba(255,255,255,0.35)", strong: false },
+    { ...fraudBaseline.model, color: YELLOW, strong: true },
+    { ...fraudBaseline.chance, color: "rgba(248,243,233,0.35)", strong: false },
   ];
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-      <div className="mb-4 flex items-center justify-between">
-        <span className="font-mono text-[0.65rem] uppercase tracking-wider text-white/40">
-          Autoencoder vs random chance
-        </span>
-        <span className="rounded-full bg-[#2FD4BF]/15 px-2.5 py-1 font-mono text-[0.65rem] font-medium text-[#8FB0A9]">
+    <div className="rounded-[18px_8px_18px_8px/8px_18px_8px_18px] border-2 border-paper/30 p-5">
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <span className="font-hand text-sm font-bold text-paper/70">Autoencoder vs random chance</span>
+        <span
+          className="rounded-full border-2 border-ink px-2.5 py-0.5 font-mono text-[0.65rem] font-bold text-ink"
+          style={{ backgroundColor: YELLOW }}
+        >
           {fraudBaseline.ratioLabel}
         </span>
       </div>
@@ -70,18 +73,12 @@ function BaselineCompare() {
         {rows.map((r) => (
           <div key={r.label}>
             <div className="mb-1.5 flex items-baseline justify-between gap-3">
-              <span className={`text-sm ${r.strong ? "text-white/80" : "text-white/50"}`}>
-                {r.label}
-              </span>
-              <span
-                className={`font-mono text-sm ${
-                  r.strong ? "font-semibold text-[#2FD4BF]" : "text-white/50"
-                }`}
-              >
+              <span className={`text-sm ${r.strong ? "text-paper/85" : "text-paper/55"}`}>{r.label}</span>
+              <span className="font-mono text-sm font-bold" style={{ color: r.strong ? YELLOW : PAPER }}>
                 {r.value}
               </span>
             </div>
-            <div className="h-2 w-full overflow-hidden rounded-full bg-white/[0.06]">
+            <div className="h-2.5 w-full overflow-hidden rounded-full border border-paper/25 bg-paper/10">
               <motion.div
                 className="h-full rounded-full"
                 style={{ backgroundColor: r.color }}
@@ -94,7 +91,7 @@ function BaselineCompare() {
           </div>
         ))}
       </div>
-      <p className="mt-4 font-mono text-[0.65rem] text-white/35">log scale</p>
+      <p className="mt-4 font-hand text-xs text-paper/45">log scale</p>
     </div>
   );
 }
@@ -115,24 +112,23 @@ export function MetricsPanel({
   showBaseline?: boolean;
 }) {
   return (
-    <div className="overflow-hidden rounded-card border border-white/10 bg-gradient-to-b from-[#0e2b25] to-[#06150f] text-white shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]">
-      <div className="border-b border-white/10 p-6 sm:p-7">
+    <div className="relative rot-e rounded-[8px_28px_8px_28px/28px_8px_28px_8px] border-2 border-ink bg-ink text-paper shadow-sketch-lg">
+      <Tape className="left-6 -top-3.5" rotate={-5} />
+      <div className="border-b-2 border-paper/20 p-6 sm:p-7">
         <div className="flex items-center gap-2.5">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2FD4BF] opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#2FD4BF]" />
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-70" style={{ backgroundColor: RED }} />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full border border-paper/40" style={{ backgroundColor: RED }} />
           </span>
-          <span className="font-mono text-[0.7rem] uppercase tracking-wider text-white/50">
-            {eyebrow}
-          </span>
+          <span className="font-mono text-[0.7rem] uppercase tracking-wider text-paper/55">{eyebrow}</span>
         </div>
-        <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight">{title}</h3>
+        <h3 className="mt-3 font-display text-3xl tracking-tight">{title}</h3>
         {tags && tags.length > 0 ? (
           <div className="mt-4 flex flex-wrap gap-2">
             {tags.map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[0.7rem] text-white/60"
+                className="rounded-[14px_5px_14px_5px/5px_14px_5px_14px] border border-paper/30 px-2.5 py-1 font-mono text-[0.7rem] text-paper/70"
               >
                 {t}
               </span>
@@ -142,24 +138,16 @@ export function MetricsPanel({
       </div>
 
       <div className="p-6 sm:p-7">
-        {showBaseline ? (
-          <div className="mb-6">
-            <BaselineCompare />
-          </div>
-        ) : null}
+        {showBaseline ? <div className="mb-6"><BaselineCompare /></div> : null}
 
         <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
           {groups.map((group) => (
             <div key={group.title}>
-              <div className="mb-1 flex items-baseline justify-between border-b border-white/10 pb-2">
-                <h4 className="font-mono text-xs font-medium uppercase tracking-wider text-[#8FB0A9]">
-                  {group.title}
-                </h4>
+              <div className="mb-1 border-b-2 border-paper/20 pb-2">
+                <h4 className="font-hand text-base font-bold" style={{ color: YELLOW }}>{group.title}</h4>
               </div>
-              {group.caption ? (
-                <p className="mt-2.5 text-xs leading-relaxed text-white/45">{group.caption}</p>
-              ) : null}
-              <div className="mt-1 divide-y divide-white/[0.06]">
+              {group.caption ? <p className="mt-2.5 text-xs leading-relaxed text-paper/55">{group.caption}</p> : null}
+              <div className="mt-1 divide-y divide-paper/10">
                 {group.metrics.map((m) => (
                   <MetricRow key={m.label} metric={m} />
                 ))}
@@ -169,9 +157,7 @@ export function MetricsPanel({
         </div>
 
         {footnote ? (
-          <p className="mt-6 border-t border-white/10 pt-5 text-xs leading-relaxed text-white/50">
-            {footnote}
-          </p>
+          <p className="mt-6 border-t-2 border-paper/20 pt-5 text-xs leading-relaxed text-paper/55">{footnote}</p>
         ) : null}
       </div>
     </div>

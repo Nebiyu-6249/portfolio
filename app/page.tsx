@@ -6,6 +6,8 @@ import { Projects } from "@/components/Projects";
 import { Skills } from "@/components/Skills";
 import { Certifications } from "@/components/Certifications";
 import { Contact, Footer } from "@/components/Contact";
+import { DockNav } from "@/components/DockNav";
+import { ScrollJourneyLine } from "@/components/ScrollJourneyLine";
 import { site, siteUrl } from "@/data/site";
 
 // Person structured data so the site is legible to search engines.
@@ -45,13 +47,19 @@ export default function HomePage() {
       <main id="main">
         <Hero />
         <About />
-        <Experience />
-        <Projects />
+        {/* The scroll journey line winds behind the experience and project
+            story, the narrative core of the page. */}
+        <div className="relative">
+          <ScrollJourneyLine />
+          <Experience />
+          <Projects />
+        </div>
         <Skills />
         <Certifications />
         <Contact />
       </main>
       <Footer />
+      <DockNav />
     </>
   );
 }

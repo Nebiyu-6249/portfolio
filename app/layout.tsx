@@ -1,10 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Hanken_Grotesk, Space_Mono } from "next/font/google";
+import { Hanken_Grotesk, Space_Mono, Patrick_Hand, Kalam } from "next/font/google";
 import "./globals.css";
 import { site, siteUrl } from "@/data/site";
 
-// One heavy grotesque used for both display and body (weight does the work),
-// plus a typewriter mono for kickers, chips, and the metric readouts.
+// Handwriting faces for display and short accents only.
+const display = Patrick_Hand({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-display",
+  display: "swap",
+});
+
+const hand = Kalam({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-hand",
+  display: "swap",
+});
+
+// Clean sans for body, typewriter mono for the metrics and tech, so the data
+// that makes this portfolio different stays legible.
 const sans = Hanken_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -61,7 +76,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
+  themeColor: "#F8F3E9",
 };
 
 export default function RootLayout({
@@ -70,7 +85,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`${display.variable} ${hand.variable} ${sans.variable} ${mono.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

@@ -1,61 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const links = [
-  { href: "/#about", label: "About" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/#skills", label: "Stack" },
-  { href: "/#contact", label: "Contact" },
-];
-
+// The magnification dock at the bottom is the primary navigation, so the top
+// bar is just a small brand mark.
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={`sticky top-0 z-50 transition-colors duration-300 ${
-        scrolled
-          ? "border-b border-line bg-paper/85 backdrop-blur-md"
-          : "border-b border-transparent"
-      }`}
-    >
-      <nav className="container-edge flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2.5 font-display text-[15px] font-bold tracking-tight">
-          <span className="grid h-7 w-7 place-items-center bg-ink font-mono text-[13px] font-bold text-paper">
+    <header className="relative z-30">
+      <div className="container-edge flex h-16 items-center">
+        <Link href="/" className="inline-flex items-center gap-2.5 sk-card sk-press rot-e rad-blob px-3 py-1.5">
+          <span className="grid h-6 w-6 place-items-center rounded-[10px_4px_10px_4px/4px_10px_4px_10px] border-2 border-ink bg-red font-display text-sm text-paper">
             n
           </span>
-          <span>Nebiyu Elias</span>
+          <span className="font-display text-lg leading-none">Nebiyu Elias</span>
         </Link>
-
-        <div className="hidden items-center gap-7 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="font-mono text-[0.72rem] uppercase tracking-[0.1em] text-muted transition-colors hover:text-teal"
-            >
-              {l.label}
-            </a>
-          ))}
-        </div>
-
-        <a
-          href="/#contact"
-          className="bg-ink px-4 py-2 text-sm font-semibold text-paper transition-opacity hover:opacity-90"
-        >
-          Get in touch
-        </a>
-      </nav>
+      </div>
     </header>
   );
 }

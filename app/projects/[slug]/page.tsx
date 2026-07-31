@@ -6,6 +6,8 @@ import { Footer } from "@/components/Contact";
 import { Reveal } from "@/components/motion";
 import { MetricsPanel } from "@/components/MetricsPanel";
 import { ProjectThumb } from "@/components/ProjectThumb";
+import { DockNav } from "@/components/DockNav";
+import { Tape } from "@/components/Sketch";
 import { ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
 import { caseStudySlugs, getProject } from "@/data/projects";
 import { uaeCopilotMetrics, fraudMetrics } from "@/data/metrics";
@@ -69,48 +71,37 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <main id="main">
         <article className="pb-16">
           {/* Header */}
-          <header className="border-b border-line">
-            <div className="container-edge py-14 sm:py-20">
-              <Link
-                href="/#projects"
-                className="group inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-muted transition-colors hover:text-teal"
-              >
-                <ArrowRight className="h-3.5 w-3.5 rotate-180 transition-transform duration-300 group-hover:-translate-x-0.5" />
+          <header className="border-b-2 border-ink">
+            <div className="container-edge py-12 sm:py-16">
+              <Link href="/#projects" className="inline-flex items-center gap-1.5 font-hand text-base font-bold text-red">
+                <ArrowRight className="h-4 w-4 rotate-180" />
                 All projects
               </Link>
 
-              <div className="mt-6 flex items-center gap-2.5">
-                <span className="inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-muted">
-                  {live ? (
-                    <span className="h-1.5 w-1.5 rounded-full bg-teal" />
-                  ) : (
-                    <span className="h-1.5 w-1.5 rounded-full bg-faint" />
-                  )}
+              <div className="mt-6">
+                <span className="chip rot-b">
+                  <span className={`mr-1.5 inline-block h-2 w-2 rounded-full ${live ? "bg-red" : "bg-ink"}`} />
                   {project.status.label}
                 </span>
               </div>
 
-              <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+              <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl md:text-7xl">
                 {project.name}
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
                 {project.tagline}
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-                {project.links.map((l) => (
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                {project.links.map((l, i) => (
                   <a
                     key={l.href}
                     href={l.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors hover:text-teal"
+                    className={`sk-btn ${i === 0 ? "sk-btn-primary rot-c" : "sk-btn-ghost rot-a"}`}
                   >
-                    {l.kind === "github" ? (
-                      <GitHubIcon className="h-4 w-4" />
-                    ) : (
-                      <ArrowUpRight className="h-4 w-4" />
-                    )}
+                    {l.kind === "github" ? <GitHubIcon className="h-4 w-4" /> : <ArrowUpRight className="h-4 w-4" />}
                     {l.label}
                   </a>
                 ))}
@@ -118,8 +109,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </div>
           </header>
 
-          <div className="container-edge pt-10">
-            <div className="mx-auto max-w-4xl border border-line">
+          <div className="container-edge pt-12">
+            <div className="mx-auto max-w-4xl sk-card rot-e rad-2 overflow-hidden">
               <ProjectThumb slug={project.slug} />
             </div>
           </div>
@@ -127,12 +118,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <div className="container-edge grid gap-12 py-14 lg:grid-cols-[1fr_18rem] lg:gap-16 lg:py-20">
             <div className="min-w-0">
               <Reveal>
-                <p className="max-w-2xl text-lg leading-relaxed text-ink/85">{cs.intro}</p>
+                <p className="max-w-2xl text-lg leading-relaxed text-ink">{cs.intro}</p>
               </Reveal>
 
               {panel ? (
                 <Reveal delay={0.05}>
-                  <div className="mt-10">
+                  <div className="mt-12">
                     <MetricsPanel
                       eyebrow={panel.eyebrow}
                       title={panel.title}
@@ -149,9 +140,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 {cs.sections.map((section) => (
                   <Reveal key={section.heading}>
                     <section>
-                      <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl">
-                        {section.heading}
-                      </h2>
+                      <h2 className="font-display text-3xl leading-none">{section.heading}</h2>
                       <div className="mt-3 space-y-4 text-[0.98rem] leading-relaxed text-muted">
                         {section.body.map((p, i) => (
                           <p key={i}>{p}</p>
@@ -164,12 +153,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
               {cs.honest ? (
                 <Reveal>
-                  <aside className="mt-12 border-l-2 border-teal bg-teal-soft/50 p-6 sm:p-7">
-                    <p className="kicker">Honest note</p>
-                    <h2 className="mt-2 font-display text-lg font-semibold tracking-tight">
-                      {cs.honest.heading}
-                    </h2>
-                    <div className="mt-3 space-y-3 text-[0.95rem] leading-relaxed text-ink/80">
+                  <aside className="relative mt-14 sk-card rot-d rad-4 !bg-yellow p-6 sm:p-7">
+                    <Tape className="left-8 -top-3.5" rotate={-6} />
+                    <p className="font-hand text-base font-bold text-red">honest note</p>
+                    <h2 className="mt-1 font-display text-2xl leading-none">{cs.honest.heading}</h2>
+                    <div className="mt-3 space-y-3 text-[0.95rem] leading-relaxed text-ink">
                       {cs.honest.body.map((p, i) => (
                         <p key={i}>{p}</p>
                       ))}
@@ -180,32 +168,25 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </div>
 
             {/* Sidebar: tech stack */}
-            <aside className="lg:sticky lg:top-24 lg:self-start">
-              <div className="border border-line bg-surface p-6">
-                <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-teal">
-                  Stack
-                </h2>
+            <aside className="lg:sticky lg:top-8 lg:self-start">
+              <div className="sk-card rot-f rad-3 p-6">
+                <h2 className="font-display text-xl leading-none text-ink">Stack</h2>
+                <span className="mt-2 block h-0.5 w-12 bg-red" aria-hidden="true" />
                 <ul className="mt-4 flex flex-wrap gap-1.5">
                   {project.tech.map((t) => (
-                    <li key={t} className="chip">
-                      {t}
-                    </li>
+                    <li key={t} className="chip">{t}</li>
                   ))}
                 </ul>
-                <div className="mt-6 flex flex-col gap-2 border-t border-line pt-5">
+                <div className="mt-6 flex flex-col gap-2.5 border-t-2 border-ink/15 pt-5">
                   {project.links.map((l) => (
                     <a
                       key={l.href}
                       href={l.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors hover:text-teal"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-red"
                     >
-                      {l.kind === "github" ? (
-                        <GitHubIcon className="h-4 w-4" />
-                      ) : (
-                        <ArrowUpRight className="h-4 w-4" />
-                      )}
+                      {l.kind === "github" ? <GitHubIcon className="h-4 w-4" /> : <ArrowUpRight className="h-4 w-4" />}
                       {l.label}
                     </a>
                   ))}
@@ -215,10 +196,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="container-edge">
-            <Link
-              href="/#projects"
-              className="group inline-flex items-center gap-2 border border-line px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-teal hover:text-teal"
-            >
+            <Link href="/#projects" className="sk-btn sk-btn-ghost rot-b">
               <ArrowRight className="h-4 w-4 rotate-180" />
               Back to all projects
             </Link>
@@ -226,6 +204,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </article>
       </main>
       <Footer />
+      <DockNav />
     </>
   );
 }

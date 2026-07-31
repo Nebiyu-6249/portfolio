@@ -19,17 +19,25 @@ const config: Config = {
         teal: "rgb(var(--teal) / <alpha-value>)",
         "teal-soft": "rgb(var(--teal-soft) / <alpha-value>)",
         amber: "rgb(var(--amber) / <alpha-value>)",
+        red: "rgb(var(--red) / <alpha-value>)",
+        yellow: "rgb(var(--yellow) / <alpha-value>)",
         box: "rgb(var(--box) / <alpha-value>)",
         "box-ink": "rgb(var(--box-ink) / <alpha-value>)",
         "box-muted": "rgb(var(--box-muted) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
+        hand: ["var(--font-hand)", "cursive"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       maxWidth: {
         content: "82rem",
+      },
+      boxShadow: {
+        sketch: "4px 4px 0px #1F1F1F",
+        "sketch-sm": "2px 2px 0px #1F1F1F",
+        "sketch-lg": "6px 6px 0px #1F1F1F",
       },
       borderRadius: {
         card: "4px",

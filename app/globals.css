@@ -3,40 +3,42 @@
 @tailwind utilities;
 
 /*
-  Layout and type borrowed from the reference: a light graph-paper page, very
-  heavy grotesque headings with an underlined keyword, mono uppercase kickers,
-  dark kicker boxes beside giant section titles, and bordered card grids.
-  Color identity kept from the previous build: near-neutral surface, a single
-  teal accent, and a dark evaluation panel where the real measured numbers live.
+  Hand-drawn notebook aesthetic.
+  Four colors only, in tints and shades:
+    pencil black  #1F1F1F  (ink, text, borders)
+    paper white   #F8F3E9  (backgrounds)
+    marker red    #E8433F  (primary accent, CTAs)
+    post-it yellow #FFD866 (secondary accent, tags)
+  Handwriting faces (Patrick Hand, Kalam) for display and short accents only.
+  Body copy and all numbers stay in a clean sans / mono so the data reads.
 */
 
 :root {
-  /* Deep teal on a soft sage paper. The paper is a clear step darker than the
-     white cards and thumbnails so they stand out instead of washing together. */
-  --paper: 205 216 211; /* #CDD8D3 soft sage, gives cards clear separation */
-  --surface: 251 253 252; /* #FBFDFC near-white card */
-  --raised: 230 238 235; /* #E6EEEB raised */
-  --ink: 16 36 31; /* #10241F deep teal-charcoal */
-  --muted: 79 97 90; /* #4F615A slate-teal */
-  --faint: 112 130 122; /* #70827A reads on sage */
-  --line: 183 198 191; /* #B7C6BF visible hairline */
-  --teal: 15 118 110; /* #0F766E deep teal accent (links, underlines, metrics) */
-  --teal-soft: 215 231 226; /* #D7E7E2 teal wash */
-  --amber: 15 118 110; /* #0F766E teal */
-  --box: 13 38 33; /* #0D2621 deep teal box */
-  --box-ink: 230 239 236; /* #E6EFEC */
-  --box-muted: 126 154 147; /* #7E9A93 */
+  --paper: 248 243 233; /* #F8F3E9 page */
+  --surface: 253 250 244; /* #FDFAF4 card, a lighter tint of paper */
+  --raised: 244 237 224; /* #F4EDE0 */
+  --ink: 31 31 31; /* #1F1F1F pencil black */
+  --muted: 87 83 76; /* #57534C pencil grey (shade of ink) */
+  --faint: 138 133 124; /* #8A857C */
+  --line: 31 31 31; /* borders are pencil black */
+  --red: 232 67 63; /* #E8433F marker red */
+  --yellow: 255 216 102; /* #FFD866 post-it yellow */
 
-  --font-display: "Hanken Grotesk", system-ui, sans-serif;
-  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
-  --font-mono: "Space Mono", ui-monospace, monospace;
+  /* aliases so existing utility names resolve into the new palette */
+  --teal: 232 67 63; /* -> red */
+  --teal-soft: 255 241 194; /* #FFF1C2 pale yellow wash */
+  --amber: 255 216 102; /* -> yellow */
+  --box: 31 31 31; /* dark boxes -> pencil black */
+  --box-ink: 248 243 233; /* -> paper */
+  --box-muted: 201 194 180; /* #C9C2B4 */
+
+  --font-display: "Patrick Hand", system-ui, sans-serif; /* headings, nav */
+  --font-hand: "Kalam", "Patrick Hand", cursive; /* short accents, tags */
+  --font-sans: "Hanken Grotesk", system-ui, sans-serif; /* body */
+  --font-mono: "Space Mono", ui-monospace, monospace; /* data, numbers */
 }
 
 @layer base {
-  * {
-    border-color: rgb(var(--line));
-  }
-
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -48,23 +50,19 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     background-color: rgb(var(--paper));
-    /* The graph-paper grid: faint lines over the paper color. */
-    background-image:
-      linear-gradient(rgb(var(--line) / 0.6) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--line) / 0.6) 1px, transparent 1px);
-    background-size: 46px 46px;
-    background-position: -1px -1px;
+    /* Subtle paper grain, low opacity so text contrast is untouched. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   }
 
   ::selection {
-    background-color: rgb(var(--teal) / 0.22);
+    background-color: rgb(var(--yellow));
     color: rgb(var(--ink));
   }
 
+  /* Visible, on-theme keyboard focus: a scribbly red dashed ring. */
   :focus-visible {
-    outline: 2px solid rgb(var(--teal));
+    outline: 3px dashed rgb(var(--red));
     outline-offset: 3px;
-    border-radius: 2px;
   }
 
   a,
@@ -87,41 +85,81 @@
     }
   }
 
-  /* Mono uppercase kicker with a leading dash, as in the reference. */
+  /* A short handwritten kicker/annotation. */
   .kicker {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgb(var(--muted));
-    font-weight: 400;
+    font-family: var(--font-hand);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: rgb(var(--red));
   }
 
-  /* The underlined keyword inside a giant heading. */
-  .accent-underline {
-    text-decoration: underline;
-    text-decoration-color: rgb(var(--teal));
-    text-decoration-thickness: 5px;
-    text-underline-offset: 6px;
-  }
-
-  .card {
+  /* Hand-drawn card: pencil border, hard offset shadow, per-card rotation. */
+  .sk-card {
     background-color: rgb(var(--surface));
-    border: 1px solid rgb(var(--line));
+    border: 2px solid rgb(var(--ink));
+    box-shadow: 4px 4px 0 rgb(var(--ink));
+    transform: rotate(var(--sk-rot, 0deg));
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
   }
 
-  /* Outlined pill used for tech tags. */
+  /* Press-down feedback on interactive cards and buttons. */
+  .sk-press:hover,
+  .sk-press:focus-visible {
+    transform: rotate(var(--sk-rot, 0deg)) translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgb(var(--ink));
+  }
+
+  .sk-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px solid rgb(var(--ink));
+    box-shadow: 4px 4px 0 rgb(var(--ink));
+    transform: rotate(var(--sk-rot, 0deg));
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    line-height: 1;
+    padding: 0.7rem 1.15rem;
+  }
+  .sk-btn:hover,
+  .sk-btn:focus-visible {
+    transform: rotate(var(--sk-rot, 0deg)) translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgb(var(--ink));
+  }
+  .sk-btn-primary {
+    background-color: rgb(var(--red));
+    color: rgb(var(--paper));
+  }
+  .sk-btn-ghost {
+    background-color: rgb(var(--surface));
+    color: rgb(var(--ink));
+  }
+
+  /* Outlined hand-drawn tag/chip. */
   .chip {
     display: inline-flex;
     align-items: center;
-    border: 1px solid rgb(var(--line));
-    padding: 0.3rem 0.6rem;
+    border: 2px solid rgb(var(--ink));
+    border-radius: 20px 8px 20px 8px / 8px 20px 8px 20px;
+    padding: 0.15rem 0.55rem;
     font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgb(var(--muted));
+    font-size: 0.7rem;
+    background-color: rgb(var(--surface));
+    color: rgb(var(--ink));
     white-space: nowrap;
+  }
+
+  /* A strip of masking tape holding down a corner. */
+  .tape {
+    position: absolute;
+    width: 92px;
+    height: 26px;
+    background-color: rgb(var(--yellow) / 0.75);
+    border-left: 1px dashed rgb(var(--ink) / 0.25);
+    border-right: 1px dashed rgb(var(--ink) / 0.25);
+    box-shadow: 0 1px 2px rgb(var(--ink) / 0.12);
   }
 
   .line-clamp-3 {
@@ -129,6 +167,62 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+}
+
+@layer utilities {
+  /* Irregular, asymmetric radii. Varied so no two cards match. */
+  .rad-1 {
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  }
+  .rad-2 {
+    border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  }
+  .rad-3 {
+    border-radius: 210px 12px 44px 180px / 18px 210px 190px 22px;
+  }
+  .rad-4 {
+    border-radius: 22px 190px 200px 24px / 190px 22px 24px 210px;
+  }
+  .rad-5 {
+    border-radius: 160px 28px 200px 20px / 20px 200px 26px 180px;
+  }
+  .rad-blob {
+    border-radius: 38px 12px 40px 14px / 14px 40px 12px 38px;
+  }
+
+  /* Small fixed rotations, cycled across elements. */
+  .rot-a {
+    --sk-rot: -1.5deg;
+  }
+  .rot-b {
+    --sk-rot: 1deg;
+  }
+  .rot-c {
+    --sk-rot: -0.75deg;
+  }
+  .rot-d {
+    --sk-rot: 1.5deg;
+  }
+  .rot-e {
+    --sk-rot: -1deg;
+  }
+  .rot-f {
+    --sk-rot: 0.75deg;
+  }
+
+  /* Post-it yellow highlighter behind a run of text. */
+  .mark-yellow {
+    background-image: linear-gradient(rgb(var(--yellow)), rgb(var(--yellow)));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 100% 42%;
+  }
+  .mark-red {
+    background-image: linear-gradient(rgb(var(--red) / 0.28), rgb(var(--red) / 0.28));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 100% 42%;
   }
 }
 

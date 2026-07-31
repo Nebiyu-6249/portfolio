@@ -11,6 +11,11 @@ const stats = [
   { value: "0.64%", label: "fraud false-positive rate" },
 ];
 
+const INK = "#1F1F1F";
+const PAPER = "#F8F3E9";
+const RED = "#E8433F";
+const YELLOW = "#FFD866";
+
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -22,8 +27,8 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "linear-gradient(135deg, #0e2b25 0%, #06150f 100%)",
-          color: "#F4F4F1",
+          background: PAPER,
+          color: INK,
           fontFamily: "sans-serif",
         }}
       >
@@ -33,42 +38,35 @@ export default function OpengraphImage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "44px",
-              height: "44px",
-              borderRadius: "10px",
-              background: "#F4F4F1",
-              color: "#10241F",
-              fontSize: "26px",
+              width: "48px",
+              height: "48px",
+              borderRadius: "12px 5px 12px 5px",
+              background: RED,
+              color: PAPER,
+              border: `3px solid ${INK}`,
+              boxShadow: `4px 4px 0px ${INK}`,
+              fontSize: "28px",
               fontWeight: 800,
             }}
           >
             n
           </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: "20px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: "#2FD4BF",
-              fontWeight: 600,
-            }}
-          >
-            Measured, not asserted
+          <div style={{ display: "flex", fontSize: "22px", color: INK, fontWeight: 700 }}>
+            measured, not asserted
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: "78px", fontWeight: 800, letterSpacing: "-0.02em" }}>
+          <div style={{ display: "flex", fontSize: "80px", fontWeight: 800, letterSpacing: "-0.02em" }}>
             {site.name}
           </div>
-          <div style={{ display: "flex", marginTop: "10px", fontSize: "34px", color: "#8FB0A9" }}>
+          <div style={{ display: "flex", marginTop: "10px", fontSize: "34px", color: "#57534C" }}>
             {site.role} · {site.location}
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: "28px" }}>
-          {stats.map((s) => (
+        <div style={{ display: "flex", gap: "24px" }}>
+          {stats.map((s, i) => (
             <div
               key={s.label}
               style={{
@@ -76,15 +74,14 @@ export default function OpengraphImage() {
                 flexDirection: "column",
                 flex: 1,
                 padding: "24px 28px",
-                borderRadius: "16px",
-                border: "1px solid rgba(255,255,255,0.1)",
-                background: "rgba(255,255,255,0.03)",
+                borderRadius: i % 2 === 0 ? "24px 8px 24px 8px" : "8px 24px 8px 24px",
+                border: `3px solid ${INK}`,
+                background: i === 0 ? YELLOW : "#FDFAF4",
+                boxShadow: `5px 5px 0px ${INK}`,
               }}
             >
-              <div style={{ display: "flex", fontSize: "48px", fontWeight: 700, color: "#2FD4BF" }}>
-                {s.value}
-              </div>
-              <div style={{ display: "flex", marginTop: "8px", fontSize: "22px", color: "#8FB0A9" }}>
+              <div style={{ display: "flex", fontSize: "50px", fontWeight: 800, color: INK }}>{s.value}</div>
+              <div style={{ display: "flex", marginTop: "8px", fontSize: "22px", color: "#57534C" }}>
                 {s.label}
               </div>
             </div>

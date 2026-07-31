@@ -1,31 +1,32 @@
 import { site } from "@/data/site";
 import { Reveal } from "./motion";
 import { SectionHeader } from "./SectionHeader";
+import { Tape } from "./Sketch";
 
 const facts = [
-  { k: "Based in", v: "Ras Al Khaimah, UAE" },
-  { k: "Work spans", v: "UAE, US, Ethiopia" },
-  { k: "Ships in", v: "Python, TypeScript" },
-  { k: "Models", v: "OpenAI, Claude" },
+  { k: "Based in", v: "Ras Al Khaimah, UAE", rot: "rot-a", rad: "rad-1" },
+  { k: "Work spans", v: "UAE, US, Ethiopia", rot: "rot-d", rad: "rad-2" },
+  { k: "Ships in", v: "Python, TypeScript", rot: "rot-c", rad: "rad-4" },
+  { k: "Models", v: "OpenAI, Claude", rot: "rot-b", rad: "rad-3" },
 ];
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="about" className="scroll-mt-24 py-20 sm:py-28">
       <div className="container-edge">
         <Reveal>
           <SectionHeader
             kicker="About"
             title={
               <>
-                Built, then <span className="accent-underline">measured</span>.
+                Built, then <span className="mark-yellow">measured</span>.
               </>
             }
             description="Full-stack and AI engineer who ships production systems and can prove they work."
           />
         </Reveal>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-14">
+        <div className="mt-12 grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-14">
           <Reveal>
             <div className="space-y-5 text-lg leading-relaxed text-muted">
               <p>
@@ -35,32 +36,29 @@ export function About() {
               </p>
               <p>
                 I built{" "}
-                <span className="font-semibold text-ink">AiBill</span>, a live multi-tenant
-                WhatsApp invoicing product serving UAE businesses, and I have shipped client
-                and production work across the UAE, the US, and Ethiopia. When I say a system
-                works, I mean I can show you the retrieval recall, the false-positive rate, and
-                the citation faithfulness, scored against a test set I wrote by hand.
+                <span className="mark-red font-semibold text-ink">AiBill</span>, a live
+                multi-tenant WhatsApp invoicing product serving UAE businesses, and I have
+                shipped client and production work across the UAE, the US, and Ethiopia. When I
+                say a system works, I mean I can show you the retrieval recall, the false-positive
+                rate, and the citation faithfulness, scored against a test set I wrote by hand.
               </p>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="grid grid-cols-2 gap-px overflow-hidden border border-line bg-line">
+            <div className="grid grid-cols-2 gap-4">
               {facts.map((f) => (
-                <div key={f.k} className="bg-surface p-5">
-                  <dt className="font-mono text-[0.62rem] uppercase tracking-wider text-faint">
-                    {f.k}
-                  </dt>
-                  <dd className="mt-1.5 text-sm font-semibold text-ink">{f.v}</dd>
+                <div key={f.k} className={`sk-card ${f.rot} ${f.rad} p-4`}>
+                  <p className="font-hand text-sm font-bold text-red">{f.k}</p>
+                  <p className="mt-1 text-sm font-semibold text-ink">{f.v}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-5 border border-line bg-surface p-5">
-              <p className="font-mono text-[0.62rem] uppercase tracking-wider text-faint">
-                Education
-              </p>
-              <p className="mt-1.5 text-sm font-semibold text-ink">{site.education.degree}</p>
+            <div className="relative mt-6 sk-card rot-c rad-5 p-5">
+              <Tape className="left-1/2 -top-3 -translate-x-1/2" rotate={2} />
+              <p className="font-hand text-sm font-bold text-red">Education</p>
+              <p className="mt-1.5 text-base font-semibold text-ink">{site.education.degree}</p>
               <p className="text-sm text-muted">{site.education.institution}</p>
             </div>
           </Reveal>
