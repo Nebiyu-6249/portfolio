@@ -44,16 +44,14 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
       <Nav />
-      <main id="main">
+      <main id="main" className="relative">
+        {/* The journey line fills the whole page behind the content and draws
+            itself forward with the reader's scroll percentage. */}
+        <ScrollJourneyLine />
         <Hero />
         <About />
-        {/* The scroll journey line winds behind the experience and project
-            story, the narrative core of the page. */}
-        <div className="relative">
-          <ScrollJourneyLine />
-          <Experience />
-          <Projects />
-        </div>
+        <Experience />
+        <Projects />
         <Skills />
         <Certifications />
         <Contact />

@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Hanken_Grotesk, Space_Mono, Patrick_Hand, Kalam } from "next/font/google";
+import { Hanken_Grotesk, Space_Mono, Chewy, Kalam } from "next/font/google";
 import "./globals.css";
 import { site, siteUrl } from "@/data/site";
 
-// Handwriting faces for display and short accents only.
-const display = Patrick_Hand({
+// Handwriting faces for display and short accents only. Chewy is a thick,
+// bouncy marker hand for the big display type; Kalam is a lighter hand for
+// short accents and tags.
+const display = Chewy({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-display",

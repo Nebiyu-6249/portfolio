@@ -6,6 +6,7 @@ import { heroStats } from "@/data/metrics";
 import { CountUp } from "./CountUp";
 import { ArrowUpRight } from "./Icons";
 import { HandArrow, Tape } from "./Sketch";
+import { TechLogos } from "./TechLogos";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const rots = ["rot-a", "rot-b", "rot-c", "rot-d", "rot-e"];
@@ -100,6 +101,12 @@ export function Hero() {
             ))}
           </div>
         </motion.div>
+
+        {/* Language and platform logos he actually builds with. */}
+        <div className="mt-16">
+          <p className="mb-4 font-hand text-base font-bold text-muted">built with</p>
+          <TechLogos />
+        </div>
       </div>
     </section>
   );

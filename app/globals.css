@@ -31,11 +31,8 @@
   --box: 31 31 31; /* dark boxes -> pencil black */
   --box-ink: 248 243 233; /* -> paper */
   --box-muted: 201 194 180; /* #C9C2B4 */
-
-  --font-display: "Patrick Hand", system-ui, sans-serif; /* headings, nav */
-  --font-hand: "Kalam", "Patrick Hand", cursive; /* short accents, tags */
-  --font-sans: "Hanken Grotesk", system-ui, sans-serif; /* body */
-  --font-mono: "Space Mono", ui-monospace, monospace; /* data, numbers */
+  /* The --font-* variables are provided by next/font (see layout.tsx); do not
+     redefine them here or the literal names shadow the hashed font families. */
 }
 
 @layer base {
